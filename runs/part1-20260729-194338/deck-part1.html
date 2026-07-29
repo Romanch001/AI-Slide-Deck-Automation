@@ -1,0 +1,740 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Wire Ropes Part 1 (Slides 1-21)</title>
+<style>
+  html,body{margin:0;padding:0;background:#666;}
+  * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+  .slide{ width:1280px; height:720px; position:relative; overflow:hidden; background:#ffffff; margin:0 auto 24px auto; }
+  .header{ background:#ececec; border-bottom:3px solid #b9b9b9; padding:20px 44px; }
+  .header h1{ font-size:32px; margin:0; font-weight:700; color:#161616; }
+  .header h1 .sub{ display:block; font-size:18px; font-weight:400; color:#333; margin-top:4px;}
+  .body{ padding:26px 46px; }
+  .col2{ display:flex; gap:34px; }
+  .col{ flex:1; }
+  h2.section{ font-size:21px; font-weight:700; margin:0 0 10px 0; color:#111; }
+  p{ font-size:17px; line-height:1.35; color:#151515; margin:0 0 12px 0; }
+  ul{ margin:6px 0 16px 0; padding-left:22px; }
+  li{ font-size:16px; line-height:1.5; margin-bottom:6px; color:#151515; }
+  table{ border-collapse:collapse; width:100%; }
+  th,td{ border:1px solid #333; padding:8px 12px; font-size:15px; text-align:center; }
+  th{ background:#e4e4e4; font-weight:700; }
+  .box{ border:2px solid #16b8d6; border-radius:10px; padding:16px 20px; }
+  .yellow{ background:#fff6b0; }
+  .yellowborder{ border:2px solid #222; }
+  .callout{ border:2px solid #16b8d6; border-radius:12px; padding:12px 16px; font-size:15px; font-weight:700; color:#0d7a91; text-align:center; }
+  .eqbox{ background:#fff4a3; border:2px solid #222; border-radius:6px; padding:14px 22px; display:inline-block; font-size:22px; font-weight:700; }
+  .center{ text-align:center; }
+  .imgfull{ display:block; margin:0 auto; max-width:1160px; }
+  /* title slide */
+  .title-slide{ background:#0f2036; color:#fff; }
+  .title-slide .ring{ position:absolute; border:2px solid rgba(255,255,255,0.10); border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .title-slide .grid{ position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size:110px 110px; }
+  .title-slide .content{ position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; padding:0 90px; }
+  .title-slide h1{ font-size:46px; font-weight:800; margin:0 0 14px 0; }
+  .title-slide h2{ font-size:25px; font-weight:700; color:#4fd8f0; margin:0 0 60px 0; }
+  .title-slide .foot{ position:absolute; bottom:70px; left:90px; right:90px; border-top:1px solid rgba(255,255,255,0.25); padding-top:16px; font-size:15px; color:#dbe6f0; text-align:center; line-height:1.5; }
+  .eqline{ font-size:20px; font-weight:700; text-align:center; margin:14px 0; }
+  .num{ font-size:64px; font-weight:800; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 : TITLE -->
+<div class="slide title-slide" data-document-role="page" data-label="Slide 1: Title">
+  <div class="grid"></div>
+  <div class="ring" style="width:900px;height:900px;"></div>
+  <div class="ring" style="width:680px;height:680px;"></div>
+  <div class="ring" style="width:460px;height:460px;"></div>
+  <div class="content">
+    <h1>Design of Wire Ropes, Sheaves and Drums</h1>
+    <h2>A First Principles Masterclass in Hoisting Mechanisms</h2>
+  </div>
+  <div class="foot">
+    Based on Chapter 23 of V.B. Bhandari&rsquo;s &lsquo;Design of Machine Elements&rsquo;<br>
+    Sections 23.2 &ndash; 23.4 | Unabridged Engineering Analysis
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" data-document-role="page" data-label="Slide 2: Introduction Why Wire Ropes">
+  <div class="header"><h1>Introduction: Why Wire Ropes?</h1></div>
+  <div class="body col2">
+    <div class="col">
+      <h2 class="section">Core Applications</h2>
+      <ul>
+        <li>Hoisting equipment</li>
+        <li>Haulage systems</li>
+        <li>Material handling</li>
+        <li>Stationary applications (guy wires and stays)</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h2 class="section">The Three Engineering Advantages</h2>
+      <div class="yellow yellowborder" style="border-radius:8px;padding:14px 18px;margin-bottom:14px;">
+        <b style="font-size:18px;">High Strength-to-Weight Ratio</b>
+      </div>
+      <div class="yellow yellowborder" style="border-radius:8px;padding:14px 18px;margin-bottom:14px;">
+        <b style="font-size:18px;">Silent Operation</b><br><span style="font-size:14px;">(maintains silence even at high velocities)</span>
+      </div>
+      <div class="yellow yellowborder" style="border-radius:8px;padding:14px 18px;">
+        <b style="font-size:18px;">Greater Reliability</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" data-document-role="page" data-label="Slide 3: Anatomy of a Wire Rope">
+  <div class="header"><h1>Anatomy of a Wire Rope</h1></div>
+  <div class="body col2">
+    <div class="col">
+      <h2 class="section">Hierarchy of Construction:</h2>
+      <p>&#8226; Wire &rarr; Strand &rarr; Rope</p>
+      <p>Individual steel wires are twisted into strands (usually 6), which are then twisted around a central core.</p>
+      <h2 class="section">Core Types and Applications:</h2>
+      <p><b>Fibre</b> (sisal, hemp, cotton): Flexible, suitable for all conditions except severe crushing.</p>
+      <p><b>Steel</b> (soft wire strand): Used under severe heat or crushing loads.</p>
+      <p><b>Synthetic</b> (plastic/impregnated): Special purpose applications.</p>
+    </div>
+    <div class="col center" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+      <div style="display:flex;gap:40px;align-items:flex-end;">
+        <div>
+          <defs><pattern id="hatch" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="4" stroke="black" stroke-width="1"/></pattern></defs><svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<circle cx="110.0" cy="110.0" r="106.7" fill="none" stroke="black" stroke-width="2"/>
+<circle cx="110.0" cy="110.0" r="35.2" fill="url(#hatch)" stroke="black" stroke-width="1"/>
+<circle cx="163.3" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="194.7" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="132.0" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="110.0" cy="171.6" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="141.3" cy="171.6" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="198.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="198.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="78.7" cy="171.6" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="144.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="144.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="56.7" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="88.0" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="25.3" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="56.7" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="88.0" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="25.3" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="110.0" cy="48.4" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="141.3" cy="48.4" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="75.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="75.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="78.6" cy="48.4" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="21.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="21.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="163.3" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="194.7" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="132.0" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+</svg>
+          <p style="text-align:center;font-weight:700;">6 &times; 7 (6/1)</p>
+        </div>
+        <div>
+          <defs><pattern id="hatch" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="4" stroke="black" stroke-width="1"/></pattern></defs><svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<circle cx="110.0" cy="110.0" r="106.7" fill="none" stroke="black" stroke-width="2"/>
+<circle cx="110.0" cy="110.0" r="35.2" fill="url(#hatch)" stroke="black" stroke-width="1"/>
+<circle cx="163.3" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="182.2" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="144.5" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="110.0" cy="171.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.8" cy="171.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="187.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="187.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="91.2" cy="171.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="155.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="155.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="181.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="197.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="207.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="207.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="197.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="181.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="162.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="145.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="136.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="136.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="145.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="162.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="56.7" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="75.5" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="37.8" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="56.7" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="75.5" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="37.8" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="110.0" cy="48.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.8" cy="48.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="64.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="64.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="91.2" cy="48.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="32.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="32.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="57.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="74.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="83.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="83.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="74.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="57.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="38.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="22.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="13.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="13.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="22.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="38.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="163.3" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="182.2" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="144.5" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+</svg>
+          <p style="text-align:center;font-weight:700;">6 &times; 19 (12/6/1)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" data-document-role="page" data-label="Slide 4: Rope Specification Notation">
+  <div class="header"><h1>Rope Specification Notation</h1></div>
+  <div class="body">
+    <div style="display:flex;align-items:center;justify-content:center;gap:0;margin:20px 0 30px 0;">
+      <div style="background:#17b3c9;color:#fff;padding:14px 18px;border-radius:4px;font-size:16px;font-weight:700;max-width:220px;text-align:center;">Number of strands in the wire rope</div>
+      <div style="width:0;height:0;border-top:22px solid transparent;border-bottom:22px solid transparent;border-left:34px solid #17b3c9;"></div>
+      <div class="num" style="margin:0 30px;">6 &times; 19</div>
+      <div style="width:0;height:0;border-top:22px solid transparent;border-bottom:22px solid transparent;border-right:34px solid #17b3c9;"></div>
+      <div style="background:#17b3c9;color:#fff;padding:14px 18px;border-radius:4px;font-size:16px;font-weight:700;max-width:220px;text-align:center;">Number of steel wires in each strand</div>
+    </div>
+    <table>
+      <tr><th colspan="2">Popular Constructions</th></tr>
+      <tr><th>Designation</th><th>Detailed Notation</th></tr>
+      <tr><td>6 &times; 7</td><td>(6/1)</td></tr>
+      <tr><td>6 &times; 19</td><td>(12/6/1)</td></tr>
+      <tr><td>6 &times; 37</td><td>(18/12/6/1)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" data-document-role="page" data-label="Slide 5: Rope Lay Direction of Twist">
+  <div class="header"><h1>Rope Lay: Direction of Twist</h1></div>
+  <div class="body">
+    <p>The <b>lay</b> refers to the manner in which wires are helically laid into strands, and strands into the rope.</p>
+    <table>
+      <tr><th>Lang&rsquo;s Lay</th><th>Regular Lay (Ordinary Lay)</th></tr>
+      <tr>
+        <td style="padding:14px;"><div style="width:100%;height:70px;background:repeating-linear-gradient(35deg, #222 0 3px, transparent 3px 16px);"></div></td>
+        <td style="padding:14px;"><div style="width:100%;height:70px;background:repeating-linear-gradient(35deg, #222 0 2px, transparent 2px 14px), repeating-linear-gradient(-35deg,#222 0 2px, transparent 2px 14px), repeating-linear-gradient(0deg,#222 0 1px, transparent 1px 10px);"></div></td>
+      </tr>
+      <tr>
+        <td style="text-align:left;">Wires in the strand are twisted in the <b>SAME</b> direction as the strands.</td>
+        <td style="text-align:left;">Wires and strands twisted in <b>OPPOSITE</b> directions.</td>
+      </tr>
+      <tr>
+        <td style="text-align:left;">Result: Difficult to handle, less resistant to crushing/distortion, tends to untwist.</td>
+        <td style="text-align:left;background:#fff6b0;">
+          <b>Safety Advantages:</b>
+          <ol style="margin:6px 0 0 18px;padding:0;font-size:14px;">
+            <li>More structural stability</li>
+            <li>More resistance to crushing and distortion</li>
+            <li>Less tendency to rotate under load</li>
+            <li>Less possibility of kinking</li>
+            <li>Easy in handling during installation</li>
+          </ol>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" data-document-role="page" data-label="Slide 6: Selection Guideline 1 Strength">
+  <div class="header"><h1>Selection Guideline 1: Strength</h1></div>
+  <div class="body">
+    <h2 class="section">Tensile Design: Tensile Designation (N/mm&sup2;)</h2>
+    <div style="position:relative;height:110px;margin:10px 0 20px 0;">
+      <div style="position:absolute;top:40px;left:40px;right:120px;height:14px;background:#17b3c9;"></div>
+      <div style="position:absolute;top:22px;right:20px;width:0;height:0;border-top:25px solid transparent;border-bottom:25px solid transparent;border-left:60px solid #17b3c9;"></div>
+      <div style="position:absolute;top:0;right:150px;color:#17b3c9;font-weight:800;font-size:20px;">Increasing Load Capacity</div>
+      <div style="position:absolute;top:26px;left:28px;width:26px;height:26px;border-radius:50%;background:#dfe4e6;border:3px solid #17b3c9;"></div>
+      <div style="position:absolute;top:26px;left:38%;width:26px;height:26px;border-radius:50%;background:#dfe4e6;border:3px solid #17b3c9;"></div>
+      <div style="position:absolute;top:26px;left:72%;width:26px;height:26px;border-radius:50%;background:#dfe4e6;border:3px solid #17b3c9;"></div>
+      <div style="position:absolute;top:64px;left:14px;font-size:26px;font-weight:800;">1570</div>
+      <div style="position:absolute;top:64px;left:35%;font-size:26px;font-weight:800;">1770</div>
+      <div style="position:absolute;top:64px;left:69%;font-size:26px;font-weight:800;">1960</div>
+    </div>
+    <table>
+      <tr><th>Fibre Core</th><th style="background:#fff6b0;">Steel Core</th></tr>
+      <tr>
+        <td style="text-align:left;">Baseline strength, maximum flexibility.</td>
+        <td style="text-align:left;background:#fff6b0;">Replaces fibre to actively increase the total strength and load capacity of the wire rope.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" data-document-role="page" data-label="Slide 7: Selection Guideline 2 Flexibility">
+  <div class="header"><h1>Selection Guideline 2: Flexibility</h1></div>
+  <div class="body">
+    <p>Flexibility is critical where sheaves are small or where the rope makes many bends. It is achieved by using a large number of small-diameter wires.</p>
+    <table>
+      <tr><th>6 &times; 7 Construction</th><th>6 &times; 19 or 6 &times; 37 Construction</th></tr>
+      <tr>
+        <td style="padding:12px;"><defs><pattern id="hatch" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="4" stroke="black" stroke-width="1"/></pattern></defs><svg width="150" height="150" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<circle cx="110.0" cy="110.0" r="106.7" fill="none" stroke="black" stroke-width="2"/>
+<circle cx="110.0" cy="110.0" r="35.2" fill="url(#hatch)" stroke="black" stroke-width="1"/>
+<circle cx="163.3" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="194.7" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="132.0" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="110.0" cy="171.6" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="141.3" cy="171.6" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="198.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="198.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="78.7" cy="171.6" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="144.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="144.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="56.7" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="88.0" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="167.9" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="25.3" cy="140.8" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="113.7" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="56.7" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="88.0" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="25.3" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="41.0" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="72.3" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="110.0" cy="48.4" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="141.3" cy="48.4" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="75.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="75.5" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="78.6" cy="48.4" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="94.3" cy="21.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="125.7" cy="21.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="163.3" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="194.7" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="106.3" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="132.0" cy="79.2" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="147.7" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+<circle cx="179.0" cy="52.1" r="16.5" fill="white" stroke="black" stroke-width="1.2"/>
+</svg></td>
+        <td style="padding:12px;"><defs><pattern id="hatch" width="4" height="4" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="4" stroke="black" stroke-width="1"/></pattern></defs><svg width="150" height="150" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<circle cx="110.0" cy="110.0" r="106.7" fill="none" stroke="black" stroke-width="2"/>
+<circle cx="110.0" cy="110.0" r="35.2" fill="url(#hatch)" stroke="black" stroke-width="1"/>
+<circle cx="163.3" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="182.2" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="144.5" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="110.0" cy="171.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.8" cy="171.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="187.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="187.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="91.2" cy="171.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="155.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="155.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="181.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="197.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="207.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="207.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="197.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="181.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="162.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="145.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="136.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="136.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="145.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="162.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="56.7" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="75.5" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="157.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="37.8" cy="140.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="124.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="176.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="166.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="150.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="105.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="114.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="131.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="56.7" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="75.5" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="37.8" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="21.3" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="30.8" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="47.2" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="66.1" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="82.6" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="92.0" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="110.0" cy="48.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.8" cy="48.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="64.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="64.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="91.2" cy="48.4" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.6" cy="32.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.4" cy="32.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="57.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="74.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="83.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="83.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="74.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="57.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="74.6" cy="38.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="84.1" cy="22.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="100.5" cy="13.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="119.5" cy="13.0" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="135.9" cy="22.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="145.4" cy="38.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="163.3" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="182.2" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="95.5" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="144.5" cy="79.2" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="62.9" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="114.6" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="105.1" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="88.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="128.0" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="137.4" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="153.9" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="172.8" cy="43.8" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="189.2" cy="53.3" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+<circle cx="198.7" cy="69.7" r="9.9" fill="white" stroke="black" stroke-width="0.8"/>
+</svg></td>
+      </tr>
+      <tr>
+        <td style="text-align:left;">Few wires of relatively large size. Too stiff for hoisting purposes. Suitable only as haulage and guy ropes.</td>
+        <td style="text-align:left;">Large number of small-diameter wires. Highly flexible. <span style="background:#fff6b0;">The standard choice for hoisting applications.</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" data-document-role="page" data-label="Slide 8: Selection Guideline 3 Abrasion Resistance">
+  <div class="header"><h1>Selection Guideline 3: Abrasion Resistance</h1></div>
+  <div class="body">
+    <p>Where the wire rope is likely to drag through gritty material or across a stationary object, abrasion resistance becomes the governing design factor.</p>
+    <div class="box" style="display:flex;align-items:center;gap:30px;background:#f4f4f2;margin-top:16px;">
+      <div style="flex:2;">
+        <h2 class="section">The 6 &times; 7 Advantage</h2>
+        <p>Because the 6 &times; 7 construction consists of a few, very large-diameter outer wires, it inherently provides better wear resistance against harsh, gritty surfaces compared to flexible multi-wire ropes.</p>
+      </div>
+      <div style="flex:1;text-align:center;">
+        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="164.6" cy="100.0" r="34.0" fill="white" stroke="black" stroke-width="2"/>
+<circle cx="132.3" cy="155.9" r="34.0" fill="white" stroke="black" stroke-width="2"/>
+<circle cx="67.7" cy="155.9" r="34.0" fill="white" stroke="black" stroke-width="2"/>
+<circle cx="35.4" cy="100.0" r="34.0" fill="white" stroke="black" stroke-width="2"/>
+<circle cx="67.7" cy="44.1" r="34.0" fill="white" stroke="black" stroke-width="2"/>
+<circle cx="132.3" cy="44.1" r="34.0" fill="white" stroke="black" stroke-width="2"/>
+<circle cx="100.0" cy="100.0" r="20.4" fill="#999" stroke="black" stroke-width="1.5"/>
+</svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 : IMAGE EMBED (real textbook Table 23.3) -->
+<div class="slide" data-document-role="page" data-label="Slide 9: Table 23.3">
+  <div class="header"><h1>Mechanical Properties &mdash; Table 23.3<span class="sub">Breaking load and mass for 6 &times; 7 (6/1) construction wire ropes</span></h1></div>
+  <div class="body center">
+    <img class="imgfull" src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part1-20260729-194338/images/table23-3.png" alt="Table 23.3 breaking load and mass for 6x7 construction wire ropes">
+  </div>
+</div>
+
+<!-- SLIDE 10 : IMAGE EMBED (real textbook Table 23.4) -->
+<div class="slide" data-document-role="page" data-label="Slide 10: Table 23.4">
+  <div class="header"><h1>Mechanical Properties &mdash; Table 23.4<span class="sub">Breaking load and mass for 6 &times; 19 (12/6/1) construction wire ropes with fibre core</span></h1></div>
+  <div class="body center">
+    <img class="imgfull" src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part1-20260729-194338/images/table23-4.png" alt="Table 23.4 breaking load and mass for 6x19 construction wire ropes">
+  </div>
+</div>
+
+<!-- SLIDE 11 : IMAGE EMBED Table 23.5 (own header baked in) -->
+<div class="slide" data-document-role="page" data-label="Slide 11: Table 23.5">
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part1-20260729-194338/images/table23-5.png" alt="Table 23.5 factor of safety general applications" style="width:1280px;height:720px;display:block;">
+</div>
+
+<!-- SLIDE 12 : IMAGE EMBED Table 23.6 (own header baked in) -->
+<div class="slide" data-document-role="page" data-label="Slide 12: Table 23.6">
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part1-20260729-194338/images/table23-6.png" alt="Table 23.6 factor of safety mining applications" style="width:1280px;height:720px;display:block;">
+</div>
+
+<!-- SLIDE 13 -->
+<div class="slide" data-document-role="page" data-label="Slide 13: The Stress Problem in Wire Ropes">
+  <div class="header"><h1>The Stress Problem in Wire Ropes</h1></div>
+  <div class="body">
+    <p>The analysis of stresses in a wire rope is complicated because individual wires are subjected to two concurrent forces:</p>
+    <ol style="font-size:17px;line-height:1.5;">
+      <li>Direct tensile stress from the suspended load.</li>
+      <li>Bending stresses as the rope wraps around the sheave.</li>
+    </ol>
+    <div style="display:flex;align-items:center;gap:24px;margin-top:10px;">
+      <div style="flex:1;text-align:center;">
+        <svg width="360" height="220" viewBox="0 0 360 220">
+          <path d="M 60 180 A 120 120 0 0 1 300 180" fill="none" stroke="#888" stroke-width="26"/>
+          <text x="180" y="34" font-size="14" text-anchor="middle" font-weight="700">Outer Wires: Lengthening (Tensile Stress)</text>
+          <text x="180" y="118" font-size="13" text-anchor="middle" font-weight="700">Inner Wires: Shortening (Compressive Stress)</text>
+          <line x1="60" y1="180" x2="30" y2="215" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+          <line x1="300" y1="180" x2="330" y2="215" stroke="#111" stroke-width="4" marker-end="url(#arrow)"/>
+          <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111"/></marker></defs>
+        </svg>
+      </div>
+      <div class="callout" style="flex:1;">This differential length change creates additional severe tensile bending stresses in the outer wires.</div>
+    </div>
+    <p style="text-align:center;margin-top:8px;">Direct Tensile Stress from Load acts downward at both ends of the wrap.</p>
+  </div>
+</div>
+
+<!-- SLIDE 14 -->
+<div class="slide" data-document-role="page" data-label="Slide 14: Bending Stress Derivation Step 1">
+  <div class="header"><h1>Bending Stress Derivation: Step 1</h1></div>
+  <div class="body">
+    <p><b>From pure bending mechanics</b></p>
+    <p>The bending stress in a single individual wire is governed by the standard flexure formula:</p>
+    <div class="eqline">&sigma;<sub>b</sub> = M<sub>b</sub>&middot;y / I</div>
+    <p>Where the distance from the neutral axis (y) is half the individual wire diameter (d<sub>w</sub>):</p>
+    <div class="eqline">y = d<sub>w</sub> / 2</div>
+    <p>Substituting y into the flexure formula:</p>
+    <div class="center"><div class="eqbox">&sigma;<sub>b</sub> = M<sub>b</sub>&middot;d<sub>w</sub> / 2I &nbsp; (Eq. a)</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 15 -->
+<div class="slide" data-document-role="page" data-label="Slide 15: Bending Stress Derivation Step 2">
+  <div class="header"><h1>Bending Stress Derivation: Step 2</h1></div>
+  <div class="body">
+    <p><b>Incorporating sheave geometry</b></p>
+    <p>The elastic curve equation relates bending moment to the radius of curvature (r):</p>
+    <div class="eqline">M<sub>b</sub> / EI = 1 / r</div>
+    <p>Because the rope wraps around the sheave, the radius of curvature (r) is equal to the radius of the sheave (D/2):</p>
+    <div class="eqline">r = D / 2</div>
+    <p>Substituting this into the elastic curve equation yields:</p>
+    <div class="center"><div class="eqbox">M<sub>b</sub> / EI = 2 / D &nbsp; (Eq. b)</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 16 (FIX garbled corkscrew text) -->
+<div class="slide" data-document-role="page" data-label="Slide 16: Bending Stress Derivation Equations 23.1 and 23.2">
+  <div class="header"><h1>Bending Stress Derivation: Equations 23.1 and 23.2</h1></div>
+  <div class="body">
+    <p>Equating expressions (a) and (b) yields the bending stress for a straight solid wire:</p>
+    <div class="center"><div class="eqbox">&sigma;<sub>b</sub> = E&middot;d<sub>w</sub> / D &nbsp; (Eq. 23.1)</div></div>
+    <p style="margin-top:16px;"><b>The Corkscrew Correction:</b></p>
+    <p>The individual wires of the wire rope make a corkscrew figure in space &mdash; a path different from that of the straight circular wire bending around the sheave. We must replace the standard modulus (E) with the effective modulus of elasticity of the rope (E<sub>r</sub>).</p>
+    <div class="center" style="margin-top:10px;"><div class="eqbox">&sigma;<sub>b</sub> = E<sub>r</sub>&middot;d<sub>w</sub> / D &nbsp; (Eq. 23.2)</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 17 -->
+<div class="slide" data-document-role="page" data-label="Slide 17: Equivalent Bending Load Equation 23.3">
+  <div class="header"><h1>Equivalent Bending Load (Equation 23.3)</h1></div>
+  <div class="body">
+    <div class="box">
+      <p style="margin:0;"><b>What is Equivalent Bending Load (P<sub>b</sub>)?</b><br>
+      It is a hypothetical tensile load that would induce the exact same stress as the bending stress. Converting bending stress into a hypothetical tensile load allows designers to simply <b>add it</b> to the <b>static loads</b>.</p>
+    </div>
+    <div class="eqline" style="margin-top:22px;">P<sub>b</sub> = &sigma;<sub>b</sub>&middot;A &nbsp; (where A is the metallic cross-sectional area of the rope)</div>
+    <div class="center" style="margin-top:16px;"><div class="eqbox">P<sub>b</sub> = A&middot;E<sub>r</sub>&middot;d<sub>w</sub> / D &nbsp; (Eq. 23.3)</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 18 : IMAGE EMBED Table 23.7 (own header baked in) -->
+<div class="slide" data-document-role="page" data-label="Slide 18: Table 23.7">
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part1-20260729-194338/images/table23-7.png" alt="Table 23.7 wire rope geometric data" style="width:1280px;height:720px;display:block;">
+</div>
+
+<!-- SLIDE 19 -->
+<div class="slide" data-document-role="page" data-label="Slide 19: Dynamic Failure Modes Fatigue and Wear">
+  <div class="header"><h1>Dynamic Failure Modes: Fatigue &amp; Wear</h1></div>
+  <div class="body">
+    <p>While static loads dictate initial sizing, wire ropes ultimately fail dynamically while passing around sheaves.</p>
+    <div class="col2" style="margin-top:8px;">
+      <div class="col">
+        <h2 class="section center">Fatigue Failure</h2>
+        <p>Caused by the continuous bending and straightening of the rope as it passes over the sheave. This results in severe fluctuating stresses that crack individual wires over time.</p>
+      </div>
+      <div class="col">
+        <h2 class="section center">Wear Failure</h2>
+        <p>As the rope bends, individual wires physically slide against each other and against the sheave groove. This results in the gradual wearing away of load-carrying metallic material.</p>
+      </div>
+    </div>
+    <div style="background:#5be3f0;border:2px solid #111;border-radius:6px;padding:16px;text-align:center;font-size:18px;font-weight:700;margin-top:20px;">
+      The severity of both failure modes is directly tied to the pressure between the rope and the sheave.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 20 -->
+<div class="slide" data-document-role="page" data-label="Slide 20: Sheave Pressure Derivation Equation 23.4">
+  <div class="header"><h1>Sheave Pressure Derivation (Equation 23.4)</h1></div>
+  <div class="body col2">
+    <div class="col" style="text-align:center;">
+      <svg width="260" height="200" viewBox="0 0 260 200">
+        <circle cx="130" cy="60" r="26" fill="#ddd" stroke="#111" stroke-width="2"/>
+        <circle cx="130" cy="60" r="14" fill="#fff" stroke="#111" stroke-width="1"/>
+        <line x1="130" y1="60" x2="130" y2="10" stroke="#111" stroke-width="2" marker-end="url(#a2)"/>
+        <line x1="130" y1="60" x2="130" y2="110" stroke="#111" stroke-width="2" marker-end="url(#a2)"/>
+        <line x1="130" y1="60" x2="80" y2="20" stroke="#111" stroke-width="2" marker-end="url(#a2)"/>
+        <line x1="130" y1="60" x2="180" y2="20" stroke="#111" stroke-width="2" marker-end="url(#a2)"/>
+        <line x1="130" y1="60" x2="80" y2="100" stroke="#111" stroke-width="2" marker-end="url(#a2)"/>
+        <line x1="130" y1="60" x2="180" y2="100" stroke="#111" stroke-width="2" marker-end="url(#a2)"/>
+        <text x="150" y="55" font-size="13">p</text>
+        <text x="60" y="15" font-size="13">p</text>
+        <text x="30" y="55" font-size="13">d_r</text>
+        <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111"/></marker></defs>
+        <text x="118" y="150" font-size="14" font-style="italic">(a)</text>
+        <path d="M 50 190 A 90 60 0 0 1 210 190" fill="none" stroke="#888" stroke-width="14"/>
+        <line x1="50" y1="190" x2="50" y2="150" stroke="#111" stroke-width="3" marker-end="url(#a2)"/>
+        <line x1="210" y1="190" x2="210" y2="150" stroke="#111" stroke-width="3" marker-end="url(#a2)"/>
+        <text x="35" y="145" font-size="14">P</text>
+        <text x="205" y="145" font-size="14">P</text>
+      </svg>
+      <p style="font-style:italic;">(a) cross-section &nbsp; (b) rope over sheave, D = sheave diameter</p>
+    </div>
+    <div class="col">
+      <p>Force per unit length of the wire rope is (p &middot; d<sub>r</sub>).</p>
+      <p>Considering equilibrium of forces in the vertical direction:</p>
+      <div class="eqline">2P = p &middot; d<sub>r</sub> &middot; D</div>
+      <div class="center"><div class="eqbox">p = 2P / (d<sub>r</sub>&middot;D) &nbsp; (Eq. 23.4)</div></div>
+      <p style="margin-top:14px;"><b>Where:</b><br>
+      P = tension in the rope (N)<br>
+      d<sub>r</sub> = nominal diameter of wire rope (mm)<br>
+      D = sheave diameter (mm)</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 21 : IMAGE EMBED Fig 23.6 (own header baked in) -->
+<div class="slide" data-document-role="page" data-label="Slide 21: Figure 23.6 Fatigue Diagram">
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part1-20260729-194338/images/fig23-6.png" alt="Figure 23.6 fatigue diagram" style="width:1280px;height:720px;display:block;">
+</div>
+
+</body>
+</html>
