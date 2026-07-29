@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Wire Rope Design Part 2</title>
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family: Arial, Helvetica, sans-serif; }
+  .page { width:1280px; height:720px; position:relative; background:#ffffff; overflow:hidden; }
+  .grid { position:absolute; inset:0;
+    background-image: linear-gradient(#e3ecf5 1px, transparent 1px), linear-gradient(90deg, #e3ecf5 1px, transparent 1px);
+    background-size: 26px 26px; }
+  .navy { color:#122a4d; }
+  .teal { color:#1596b3; }
+  h1.title { position:absolute; top:36px; left:56px; font-size:38px; font-weight:800; color:#122a4d; }
+  p.intro { position:absolute; top:96px; left:56px; width:1170px; font-size:18px; color:#233a55; line-height:1.4; }
+  .tbl-cap { position:absolute; font-size:20px; font-weight:700; color:#122a4d; text-align:center; width:1280px; }
+  table.data { border-collapse:collapse; }
+  table.data th { background:#1ec8ea; color:#0d1f36; font-size:19px; font-weight:800; padding:12px 18px; border:2px solid #122a4d; }
+  table.data td { background:#e6e9ee; color:#122a4d; font-size:19px; text-align:center; padding:11px 18px; border:2px solid #122a4d; }
+  table.data tr:nth-child(odd) td { background:#f3f4f7; }
+  .stepbox { position:absolute; border:2px solid #122a4d; background:#ffffff; }
+  .stepbar { background:#7fd6ea; color:#0d1f36; font-weight:800; font-size:19px; text-align:center; padding:8px 0; border-bottom:2px solid #122a4d; }
+  .stepbody { padding:14px 22px; font-size:17px; color:#122a4d; line-height:1.5; }
+  .result { background:#f7e94a; font-weight:800; text-align:center; padding:8px; font-size:18px; color:#122a4d; margin-top:8px; }
+  .finalbox { background:#f2946b; border:2px solid #c85a2e; font-weight:800; text-align:center; padding:12px; font-size:20px; color:#3a1502; }
+  .icon { font-size:26px; }
+  .hdg { font-size:22px; font-weight:800; color:#122a4d; }
+  .sub-title { font-size:24px; font-weight:700; color:#122a4d; }
+  ul.plain { list-style:none; }
+  ul.plain li { font-size:17px; color:#233a55; margin-bottom:6px; }
+  ul.bullet li { font-size:17px; color:#233a55; margin-bottom:6px; margin-left:18px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: TITLE -->
+<div class="page" data-document-role="page" data-label="Title">
+  <div class="grid"></div>
+  <div style="position:absolute; top:0; left:0; width:1280px; height:720px; border:3px solid #17a6c9;"></div>
+  <h1 style="position:absolute; top:60px; left:56px; font-size:56px; font-weight:900; color:#122a4d; line-height:1.15;">Wire Rope<br>Design: Part 2</h1>
+  <p style="position:absolute; top:255px; left:56px; width:620px; font-size:24px; color:#1596b3; line-height:1.4;">Worked Examples, Sheaves, and Drums (Based on V.B. Bhandari)</p>
+  <p style="position:absolute; top:600px; left:56px; width:620px; font-size:20px; color:#122a4d; font-weight:600;">Comprehensive Design Procedure &amp; Reference Data</p>
+  <svg width="520" height="520" style="position:absolute; top:110px; left:700px;" viewBox="0 0 520 520">
+    <circle cx="330" cy="260" r="140" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="330" cy="260" r="95" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="330" cy="260" r="30" fill="#bfe9f2" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="330" cy="260" r="12" fill="#ffffff" stroke="#122a4d" stroke-width="2"/>
+    <path d="M 40 60 Q 150 90 235 180" fill="none" stroke="#1596b3" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 40 60 Q 150 90 235 180" fill="none" stroke="#122a4d" stroke-width="2" stroke-dasharray="4 6"/>
+    <path d="M 195 400 Q 260 460 330 400 Q 400 460 465 400" fill="none" stroke="#122a4d" stroke-width="3"/>
+  </svg>
+</div>
+
+<!-- PAGE 2: TABLE 23.8 (IMAGE EMBED) -->
+<div class="page" data-document-role="page" data-label="Table 23.8">
+  <div class="grid"></div>
+  <h1 class="title">Wire Material Breaking Strength (S<tspan></tspan>ut)</h1>
+  <p class="intro">The ultimate tensile strength (S<sub>ut</sub>) of individual wires determines the overall fatigue life and load capacity of the wire rope.</p>
+  <div class="tbl-cap" style="top:150px;">Table 23.8: Breaking strength of wire</div>
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part2-20260729-194537/table_23_8.png" style="position:absolute; top:195px; left:270px; width:740px; height:auto; border:2px solid #122a4d;">
+</div>
+
+<!-- PAGE 3: Example 23.1 setup + Steps I,II -->
+<div class="page" data-document-role="page" data-label="Example 23.1 Setup">
+  <div class="grid"></div>
+  <h1 class="title">Worked Example 23.1: Temporary Elevator Sizing</h1>
+  <div style="position:absolute; top:100px; left:56px; width:560px;">
+    <div class="hdg"><span class="icon">&#127959;</span> Application</div>
+    <p style="font-size:17px; color:#233a55; margin:8px 0 20px 0;">A temporary elevator assembled at a construction site to raise building materials.</p>
+    <div class="hdg"><span class="icon">&#9881;</span> Given Parameters</div>
+    <ul class="bullet" style="margin-top:10px;">
+      <li>Load to be raised (W): 5 kN</li>
+      <li>Lifting height (h): 20 m</li>
+      <li>Acceleration (a): 1 m/s&sup2;</li>
+      <li>Rope Construction: 6&times;19 with fibre core</li>
+      <li>Nominal Diameter (d<sub>r</sub>): 10 mm</li>
+      <li>Tensile Designation: 1570</li>
+      <li>Preliminary Factor of Safety (f<sub>s</sub>): 10</li>
+    </ul>
+  </div>
+  <div style="position:absolute; top:100px; left:660px; width:565px;">
+    <div class="hdg"><span class="icon">&#127919;</span> Objective</div>
+    <p style="font-size:17px; color:#233a55; margin:8px 0 16px 0;">Determine the number of wire ropes (z) required, neglecting bending stresses.</p>
+  </div>
+  <div class="stepbox" style="top:230px; left:660px; width:565px;">
+    <div class="stepbar">Step I: Weight of the material</div>
+    <div class="stepbody">Distributed evenly across z ropes:<br>Material weight per rope = (5000/z) N</div>
+  </div>
+  <div class="stepbox" style="top:355px; left:660px; width:565px;">
+    <div class="stepbar">Step II: Weight of the wire rope</div>
+    <div class="stepbody">From Table 23.4, mass of a 100m long 10mm rope (6&times;19 fibre core) is 34.6 kg.<br>Weight of the wire = (34.6 &times; 20 / 100) &times; 9.81
+      <div class="result">Result = 67.89 N</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: Example 23.1 Steps III, IV -->
+<div class="page" data-document-role="page" data-label="Example 23.1 Solution">
+  <div class="grid"></div>
+  <h1 class="title">Example 23.1: Acceleration Force and Resolution</h1>
+  <div class="stepbox" style="top:120px; left:56px; width:1168px;">
+    <div class="stepbar">Step III: Force due to acceleration</div>
+    <div class="stepbody" style="text-align:center;">
+      Force = (Mass of material + Mass of rope) &times; Acceleration<br>
+      Mass of material per rope = [(5000/9.81)(1/z)]<br>
+      Mass of each rope = [34.6 &times; 20 / 100]<br>
+      Force due to acceleration = [(5000/9.81)(1/z) + (34.6 &times; 20 / 100)] &times; 1
+      <div class="result" style="width:420px; margin:10px auto 0 auto;">Result = (509.68/z) + 6.92 N</div>
+    </div>
+  </div>
+  <div class="stepbox" style="top:400px; left:56px; width:1168px;">
+    <div class="stepbar">Step IV: Number of wire ropes</div>
+    <div class="stepbody" style="text-align:center;">
+      From Table 23.4, the breaking strength of the rope is 48 kN. With f<sub>s</sub> = 10:<br><br>
+      48000 / 10 = 5000/z + 67.89 + 509.68/z + 6.92<br>
+      4800 = 5509.68/z + 74.81<br>
+      z = 1.166
+      <div class="finalbox" style="width:360px; margin:14px auto 0 auto;">Final Answer: 2 wire ropes</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: Example 23.2 setup + Step I -->
+<div class="page" data-document-role="page" data-label="Example 23.2 Setup">
+  <div class="grid"></div>
+  <h1 class="title">Worked Example 23.2: Accounting for Bending Stress</h1>
+  <div style="position:absolute; top:110px; left:56px; width:560px;">
+    <div class="hdg"><span class="icon">&#9881;</span> Objective</div>
+    <p style="font-size:17px; color:#233a55; margin:8px 0 20px 0;">Assume the data of Example 23.1 (5 kN load, 10 mm 6&times;19 rope, z = 2) and determine the true factor of safety by taking bending stresses into account.</p>
+    <div class="hdg"><span class="icon">&#127959;</span> Given</div>
+    <p style="font-size:17px; color:#233a55; margin-top:8px;">Sheave diameter D = 45 d<sub>r</sub></p>
+  </div>
+  <div class="stepbox" style="top:110px; left:660px; width:565px;">
+    <div class="stepbar">Step I: Bending load (P<sub>b</sub>)</div>
+    <div class="stepbody">
+      From Eq. 23.3 and Table 23.7 for a 6&times;19 rope:<br>
+      &bull; E<sub>r</sub> = 83000 N/mm&sup2;<br>
+      &bull; d<sub>w</sub> = 0.063 d<sub>r</sub><br>
+      &bull; A = 0.40 d<sub>r</sub>&sup2;<br><br>
+      P<sub>b</sub> = AE<sub>r</sub>d<sub>w</sub>/D = [(0.40 d<sub>r</sub>&sup2;)(83000)(0.063 d<sub>r</sub>)] / (45 d<sub>r</sub>)<br>
+      P<sub>b</sub> = 46.48 d<sub>r</sub>&sup2; = 46.48 (10)&sup2;
+      <div class="result">Result = 4648 N</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6: Example 23.2 Steps II, III -->
+<div class="page" data-document-role="page" data-label="Example 23.2 Solution">
+  <div class="grid"></div>
+  <h1 class="title">Example 23.2: True Factor of Safety</h1>
+  <div class="stepbox" style="top:110px; left:56px; width:1168px;">
+    <div class="stepbar">Step II: Total load on wire rope</div>
+    <div class="stepbody" style="text-align:center;">
+      The total force consists of the factors from Example 23.1 plus the bending load (P<sub>b</sub>).<br>
+      Because z=2, the external loads are halved per rope:<br>
+      P<sub>total</sub> = (5000/2) + 67.89 + (509.68/2) + 6.92 + 4648
+      <div class="result" style="width:340px; margin:10px auto 0 auto;">Result = 7477.65 N</div>
+    </div>
+  </div>
+  <div class="stepbox" style="top:350px; left:56px; width:1168px;">
+    <div class="stepbar">Step III: Factor of safety</div>
+    <div class="stepbody" style="text-align:center;">
+      Using the established breaking strength of 48 kN (48,000 N): f<sub>s</sub> = 48000 / 7477.65
+      <div class="result" style="width:200px; margin:10px auto 0 auto;">Result = 6.42</div>
+    </div>
+  </div>
+  <div style="position:absolute; top:580px; left:56px; width:1168px; border:2px solid #e8734a; border-radius:14px; padding:16px 24px; font-size:17px; color:#122a4d; text-align:center;">
+    <b>Engineering Takeaway:</b> Neglecting bending stress suggested a safety factor of 10. Including the severe realities of bending reduces the true safety factor to 6.42.
+  </div>
+</div>
+
+<!-- PAGE 7: Example 23.3 setup + Step I -->
+<div class="page" data-document-role="page" data-label="Example 23.3 Setup">
+  <div class="grid"></div>
+  <h1 class="title">Worked Example 23.3: Fatigue Life Calculation</h1>
+  <svg width="230" height="480" style="position:absolute; top:115px; left:60px;" viewBox="0 0 230 480">
+    <rect x="20" y="10" width="190" height="14" fill="#122a4d"/>
+    <line x1="30" y1="24" x2="30" y2="45" stroke="#122a4d" stroke-width="3"/>
+    <line x1="45" y1="24" x2="45" y2="45" stroke="#122a4d" stroke-width="3"/>
+    <line x1="60" y1="24" x2="60" y2="45" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="115" cy="110" r="65" fill="#9fe0ee" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="115" cy="110" r="14" fill="#ffffff" stroke="#122a4d" stroke-width="2"/>
+    <circle cx="115" cy="330" r="65" fill="#9fe0ee" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="115" cy="330" r="14" fill="#ffffff" stroke="#122a4d" stroke-width="2"/>
+    <line x1="60" y1="110" x2="60" y2="330" stroke="#122a4d" stroke-width="4"/>
+    <line x1="170" y1="110" x2="170" y2="330" stroke="#122a4d" stroke-width="4"/>
+    <line x1="80" y1="180" x2="80" y2="230" stroke="#122a4d" stroke-width="3" marker-end="url(#arr)"/>
+    <line x1="150" y1="180" x2="150" y2="230" stroke="#122a4d" stroke-width="3" marker-end="url(#arr)"/>
+    <rect x="65" y="410" width="100" height="60" fill="#ffffff" stroke="#122a4d" stroke-width="3"/>
+    <text x="115" y="446" font-size="20" text-anchor="middle" fill="#122a4d" font-weight="700">20 kN</text>
+    <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#122a4d"/></marker></defs>
+  </svg>
+  <div style="position:absolute; top:115px; left:320px; width:340px;">
+    <p style="font-size:17px; color:#233a55;"><b>Application:</b> Raising a 20 kN load over a two-part line sheave.</p>
+    <div class="hdg" style="margin-top:16px;">Given Parameters:</div>
+    <ul class="bullet" style="margin-top:8px;">
+      <li>Load (W): 20 kN</li>
+      <li>Usage Rate: 500 bends per week</li>
+      <li>Rope: 12 mm (d<sub>r</sub>), 6&times;19 fibre core</li>
+      <li>Tensile Designation: 1570</li>
+      <li>Sheave Pitch Diameter (D): 500 mm</li>
+    </ul>
+  </div>
+  <div class="stepbox" style="top:115px; left:685px; width:540px;">
+    <div class="stepbar">Step I: The (p/S<sub>ut</sub>) factor</div>
+    <div class="stepbody">
+      Each side of the two-part line shares a load of (20/2) = 10 kN.<br><br>
+      p = 2P / d<sub>r</sub>D = 2(10&times;10&sup3;) / (12&times;500) = 3.33 N/mm&sup2;<br><br>
+      S<sub>ut</sub> = 1570 N/mm&sup2; (ultimate tensile strength)
+      <div class="result">Result: p/S<sub>ut</sub> = 3.33 / 1570 = 0.0021</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 8: Example 23.3 Step II -->
+<div class="page" data-document-role="page" data-label="Example 23.3 Solution">
+  <div class="grid"></div>
+  <h1 class="title">Example 23.3: Resolving Expected Life</h1>
+  <svg width="560" height="420" style="position:absolute; top:170px; left:56px;" viewBox="0 0 560 420">
+    <line x1="60" y1="20" x2="60" y2="380" stroke="#122a4d" stroke-width="2"/>
+    <line x1="60" y1="380" x2="540" y2="380" stroke="#122a4d" stroke-width="2"/>
+    <path d="M 65 40 C 100 160, 150 320, 250 350 C 350 370, 450 375, 530 378" fill="none" stroke="#17a6c9" stroke-width="6"/>
+    <text x="10" y="45" font-size="14" fill="#122a4d">0.007</text>
+    <text x="10" y="110" font-size="14" fill="#122a4d">0.005</text>
+    <text x="10" y="240" font-size="14" fill="#122a4d">0.002</text>
+    <text x="10" y="380" font-size="14" fill="#122a4d">0.001</text>
+    <text x="150" y="400" font-size="15" fill="#122a4d">Number of bends to failure</text>
+    <text x="220" y="200" font-size="15" fill="#122a4d">6&times;19 regular lay wire rope</text>
+  </svg>
+  <div class="stepbox" style="top:170px; left:660px; width:565px;">
+    <div class="stepbar">Step II: Life of wire rope</div>
+    <div class="stepbody">
+      Using the calculated p/S<sub>ut</sub> ratio of 0.0021, we reference the experimental fatigue data for a 6&times;19 regular-lay rope (Figure 23.6).<br>
+      &bull; Bends to failure: 3.30 &times; 10<sup>5</sup> bends.<br><br>
+      Given the operational frequency of 500 bends per week:<br>
+      Life in weeks = (3.30 &times; 10<sup>5</sup>) / 500<br>
+      Life in years = (3.30 &times; 10<sup>5</sup>) / (500 &times; 52)
+      <div class="finalbox" style="margin-top:14px;">Final Answer: 12.69 years</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 9: Example 23.4 setup + Step I -->
+<div class="page" data-document-role="page" data-label="Example 23.4 Setup">
+  <div class="grid"></div>
+  <h1 class="title">Worked Example 23.4: Hoist Design for Long Fatigue Life</h1>
+  <div style="position:absolute; top:110px; left:56px; width:560px;">
+    <p style="font-size:17px; color:#233a55;"><b>Application:</b> Select a rope and sheave diameter based on fatigue failure criteria.</p>
+    <div class="hdg" style="margin-top:20px;">Given Parameters:</div>
+    <ul class="bullet" style="margin-top:8px;">
+      <li>Hoist + Material Weight (W): 5 kN (5000 N)</li>
+      <li>Depth (h): 100 m</li>
+      <li>Velocity (v<sub>2</sub>): 5 m/s (attained from v<sub>1</sub>=0 in t=5 s)</li>
+      <li>Rope Target: 6&times;19, Tensile Designation 1570</li>
+    </ul>
+  </div>
+  <div class="stepbox" style="top:110px; left:660px; width:565px;">
+    <div class="stepbar">Step I: Total initial load (P) estimation</div>
+    <div class="stepbody">
+      We must assume a trial rope mass to begin iterative sizing.
+      <div style="text-align:center; background:#bfe9f2; border:2px solid #122a4d; border-radius:20px; padding:8px; margin:10px 0; font-weight:800;">Trial Mass = 40 kg / 100 m</div>
+      &bull; Weight of wire rope = 40 &times; 9.81 = 392.4 N<br>
+      &bull; Acceleration = (v<sub>2</sub> - v<sub>1</sub>)/t = (5-0)/5 = 1 m/s&sup2;<br>
+      &bull; Acceleration force = [(5000/9.81) + 40] &times; 1 = 549.68 N
+      <div class="result">Total P = 5000 + 392.4 + 549.68 = 5942.08 N</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 10: Example 23.4 Steps II,III -->
+<div class="page" data-document-role="page" data-label="Example 23.4 Sizing">
+  <div class="grid"></div>
+  <h1 class="title">Example 23.4: Sizing via Fatigue Criterion</h1>
+  <div class="stepbox" style="top:110px; left:56px; width:1168px;">
+    <div class="stepbar">Step II: Value of (p) for long fatigue life</div>
+    <div class="stepbody" style="text-align:center;">
+      For long fatigue life, the ratio p/S<sub>ut</sub> must be &le; 0.0015. S<sub>ut</sub> = 1570 N/mm&sup2;.<br>
+      p = 0.0015 &times; S<sub>ut</sub> = 0.0015 &times; 1570. Target p = 2.355 N/mm&sup2;
+    </div>
+  </div>
+  <div class="stepbox" style="top:270px; left:56px; width:1168px;">
+    <div class="stepbar">Step III: Nominal diameter of wire rope (d<sub>r</sub>)</div>
+    <div class="stepbody" style="text-align:center;">
+      From Table 23.7, recommended sheave diameter D = 45d<sub>r</sub><br>
+      p = 2P/d<sub>r</sub>D &rArr; 2.355 = 2P/d<sub>r</sub>(45d<sub>r</sub>), d<sub>r</sub>&sup2; = 2P/(2.355&times;45) = P/52.99, d<sub>r</sub> = &radic;(5942.08/52.99) = 10.59 mm
+    </div>
+  </div>
+  <div style="position:absolute; top:460px; left:56px; width:1168px; border:2px solid #e8734a; border-radius:14px; padding:18px 24px; font-size:22px; font-weight:800; color:#122a4d; text-align:center;">
+    Selection: Round up to standard nominal diameter d<sub>r</sub> = 12 mm.<br>Sheave Diameter (D) = 45 &times; 12 = 540 mm
+  </div>
+</div>
+
+<!-- PAGE 11: Example 23.4 Steps IV,V -->
+<div class="page" data-document-role="page" data-label="Example 23.4 Verification">
+  <div class="grid"></div>
+  <h1 class="title">Example 23.4: Design Verification</h1>
+  <div class="stepbox" style="top:110px; left:56px; width:565px; height:480px;">
+    <div class="stepbar">Step IV: Check iterative trial</div>
+    <div class="stepbody">
+      Recalculating with the actual 12 mm rope mass of 49.8 kg / 100 m (from Table 23.4).<br>
+      &bull; True weight of wire: 49.8 &times; 9.81 = 488.54 N<br>
+      &bull; True acceleration force: [(5000/9.81) + 49.8] &times; 1 = 559.48 N
+      <div class="result">True Total P: 5000 + 488.54 + 559.48 = 6048.02 N</div>
+      Re-evaluating Fatigue Criteria:<br>
+      p = 2P/d<sub>r</sub>D = 2(6048.02)/(12&times;540) = 1.867 N/mm&sup2;<br>
+      p/S<sub>ut</sub> = 1.867/1570 = 0.00119 (&lt; 0.0015, Validates long life)
+    </div>
+  </div>
+  <div class="stepbox" style="top:110px; left:660px; width:565px; height:480px;">
+    <div class="stepbar">Step V: Static design factor of safety</div>
+    <div class="stepbody">
+      From Table 23.4, the minimum breaking load of a 12 mm, 6&times;19 fibre core rope is 69 kN (69,000 N).<br><br>
+      f<sub>s</sub> = Breaking Load / P = 69000 / 6048.02
+      <div class="finalbox" style="margin-top:14px;">Result: f<sub>s</sub> = 11.4</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 12: Three design requirements -->
+<div class="page" data-document-role="page" data-label="Sheave Drum Requirements">
+  <div class="grid"></div>
+  <h1 class="title">Hardware Design: Rope Sheaves and Drums</h1>
+  <p class="intro">The physical hardware guiding and winding the rope is just as critical as the rope itself. There are three primary design requirements:</p>
+  <div style="position:absolute; top:180px; left:100px; width:340px; text-align:center;">
+    <div style="font-size:44px;">&#8598;&#8599;<br>&#8601;&#8600;</div>
+    <p style="font-size:16px; color:#233a55; margin-top:10px;"><b>1. Proper Size:</b> Sheaves and drums must be as large as possible to maximize rope life.</p>
+  </div>
+  <div style="position:absolute; top:180px; left:470px; width:340px; text-align:center;">
+    <div style="font-size:44px; color:#17a6c9;">&#8635;</div>
+    <p style="font-size:16px; color:#233a55; margin-top:10px;"><b>2. Free Rotation:</b> They must run freely on their axles to minimize friction.</p>
+  </div>
+  <div style="position:absolute; top:180px; left:840px; width:340px; text-align:center;">
+    <div style="font-size:44px; color:#17a6c9;">&#9711;</div>
+    <p style="font-size:16px; color:#233a55; margin-top:10px;"><b>3. Accurate Grooves:</b> They must possess correctly dimensioned grooves to support the rope without pinching.</p>
+  </div>
+  <div style="position:absolute; top:460px; left:56px; width:1168px; background:#122a4d; border-radius:14px; padding:22px 30px; text-align:center;">
+    <div style="color:#f7e94a; font-weight:800; font-size:20px; margin-bottom:8px;">The Design Trade-Off</div>
+    <div style="color:#ffffff; font-size:17px; line-height:1.5;">While a larger diameter exponentially increases rope life by reducing bending stresses, it directly increases manufacturing cost and generates significantly higher centrifugal forces at high operational speeds.</div>
+  </div>
+</div>
+
+<!-- PAGE 13: Table 23.9 (IMAGE EMBED) -->
+<div class="page" data-document-role="page" data-label="Table 23.9">
+  <div class="grid"></div>
+  <h1 class="title">Minimum Ratio of Drum/Sheave to Rope Diameter</h1>
+  <p class="intro" style="top:88px;">Table 23.9: Balancing rope life against centrifugal force limitations.</p>
+  <div style="position:absolute; top:145px; left:150px; font-size:19px; font-weight:800; color:#122a4d;">(a) Mining Installations</div>
+  <div style="position:absolute; top:145px; left:790px; font-size:19px; font-weight:800; color:#122a4d;">(b) Cranes and Hoists</div>
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part2-20260729-194537/table_23_9.png" style="position:absolute; top:185px; left:20px; width:1240px; height:auto; border:2px solid #122a4d;">
+</div>
+
+<!-- PAGE 14: Sheave Material Selection -->
+<div class="page" data-document-role="page" data-label="Sheave Material">
+  <div class="grid"></div>
+  <h1 class="title">Sheave Material Selection &amp; Construction</h1>
+  <p class="intro">Rope life depends heavily on the contacting material of the sheave groove.</p>
+  <div style="position:absolute; top:150px; left:56px; width:1168px; text-align:center; font-size:22px; font-weight:800; color:#122a4d;">The Wear Ratio Matrix</div>
+  <div style="position:absolute; top:195px; left:56px; width:560px; border:3px solid #17a6c9; border-radius:8px; padding:20px 26px;">
+    <div style="font-size:21px; font-weight:800; color:#122a4d;">Grey Cast Iron (FG 200)</div>
+    <ul class="bullet" style="margin-top:12px;">
+      <li><b>Preferred Material</b></li>
+      <li>Baseline wear on rope: 1.0</li>
+      <li>Naturally dampens friction</li>
+    </ul>
+  </div>
+  <div style="position:absolute; top:195px; left:664px; width:560px; border:2px solid #aab4c0; border-radius:8px; padding:20px 26px;">
+    <div style="font-size:21px; font-weight:800; color:#122a4d;">Mild / Welded Steel</div>
+    <ul class="bullet" style="margin-top:12px;">
+      <li>Secondary alternative</li>
+      <li>Increased wear on rope: ~1.1</li>
+      <li>Steel sheaves cause ropes to wear faster</li>
+    </ul>
+  </div>
+  <div style="position:absolute; top:430px; left:56px; width:1168px; border:3px solid #122a4d; border-radius:10px;">
+    <div style="background:#7fd6ea; padding:8px 20px; font-size:19px; font-weight:800; color:#0d1f36; border-bottom:2px solid #122a4d;">Construction Specs:</div>
+    <ul class="bullet" style="padding:16px 24px;">
+      <li><b>Small Sheaves:</b> Cast as one-piece construction without supporting ribs.</li>
+      <li><b>Large Sheaves:</b> Cast with structural ribs.</li>
+      <li><b>Mounting:</b> Always freely mounted on fixed axles using either rolling-contact bearings or bronze bushings.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PAGE 15: Groove Geometry -->
+<div class="page" data-document-role="page" data-label="Groove Geometry">
+  <div class="grid"></div>
+  <h1 class="title">Sheave Groove Geometry &amp; Failure Modes</h1>
+  <svg width="560" height="330" style="position:absolute; top:130px; left:56px;" viewBox="0 0 560 330">
+    <path d="M 60 30 L 60 90 Q 60 200 280 220 Q 500 200 500 90 L 500 30" fill="#cdeaf2" stroke="#122a4d" stroke-width="3"/>
+    <line x1="20" y1="30" x2="60" y2="30" stroke="#122a4d" stroke-width="3"/>
+    <line x1="500" y1="30" x2="540" y2="30" stroke="#122a4d" stroke-width="3"/>
+    <text x="80" y="270" font-size="17" fill="#122a4d">40&deg; - 45&deg;</text>
+    <text x="255" y="255" font-size="17" fill="#122a4d">120&deg;</text>
+    <text x="280" y="190" font-size="17" fill="#122a4d">R</text>
+    <text x="510" y="90" font-size="17" fill="#122a4d">2d<tspan baseline-shift="sub">r</tspan></text>
+  </svg>
+  <div style="position:absolute; top:470px; left:56px; width:560px;">
+    <div class="hdg">Standard Dimensions</div>
+    <ul class="bullet" style="margin-top:10px;">
+      <li><b>Groove Radius (R):</b> 1.05 &times; nominal rope radius</li>
+      <li><b>Groove Depth:</b> 2 &times; d<sub>r</sub> (nominal rope diameter)</li>
+      <li><b>Bottom Arc:</b> Circular arc sweeping 120&deg;</li>
+      <li><b>Side Flare Angle:</b> Included angle between 40&deg; to 45&deg;</li>
+    </ul>
+  </div>
+  <div style="position:absolute; top:120px; left:670px; width:555px; border:2px solid #c85a2e; border-radius:8px;">
+    <div style="background:#f2946b; padding:8px 20px; font-size:18px; font-weight:800; color:#3a1502;">Oversize Groove (Too Large R)</div>
+    <ul class="bullet" style="padding:14px 22px;">
+      <li>Loss of lateral support.</li>
+      <li>Wire rope flattens and deforms under heavy load.</li>
+    </ul>
+  </div>
+  <div style="position:absolute; top:320px; left:670px; width:555px; border:2px solid #cba020; border-radius:8px;">
+    <div style="background:#f7e94a; padding:8px 20px; font-size:18px; font-weight:800; color:#3a2f02;">Undersize Groove (Too Small R)</div>
+    <ul class="bullet" style="padding:14px 22px;">
+      <li>Causes rope distortion and extreme pinching.</li>
+      <li>Strands/wires bind against each other, multiplying internal friction.</li>
+      <li>Forces individual wires to carry unequal, excessive shares of the load.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PAGE 16: Rope Drums Construction and Sizing -->
+<div class="page" data-document-role="page" data-label="Rope Drums">
+  <div class="grid"></div>
+  <h1 class="title">Rope Drums: Construction and Sizing</h1>
+  <svg width="560" height="280" style="position:absolute; top:110px; left:56px;" viewBox="0 0 560 280">
+    <rect x="30" y="60" width="200" height="140" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <line x1="30" y1="90" x2="230" y2="90" stroke="#122a4d" stroke-width="2"/>
+    <line x1="30" y1="110" x2="230" y2="110" stroke="#122a4d" stroke-width="2"/>
+    <line x1="30" y1="130" x2="230" y2="130" stroke="#122a4d" stroke-width="2"/>
+    <line x1="30" y1="150" x2="230" y2="150" stroke="#122a4d" stroke-width="2"/>
+    <line x1="30" y1="170" x2="230" y2="170" stroke="#122a4d" stroke-width="2"/>
+    <line x1="130" y1="60" x2="130" y2="200" stroke="#122a4d" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="120" y="240" font-size="16" fill="#122a4d">(a)</text>
+    <rect x="330" y="40" width="180" height="180" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <path d="M 330 55 Q 350 45 370 55 Q 390 45 410 55 Q 430 45 450 55 Q 470 45 490 55 Q 500 50 510 55" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <path d="M 330 205 Q 350 215 370 205 Q 390 215 410 205 Q 430 215 450 205 Q 470 215 490 205 Q 500 210 510 205" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <line x1="420" y1="40" x2="420" y2="220" stroke="#122a4d" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="405" y="240" font-size="16" fill="#122a4d">(b)</text>
+    <text x="365" y="30" font-size="14" fill="#122a4d">t</text>
+    <text x="300" y="130" font-size="14" fill="#122a4d">d</text>
+  </svg>
+  <div style="position:absolute; top:110px; left:670px; width:555px;">
+    <div style="border:2px solid #122a4d; border-radius:8px;">
+      <div style="background:#bfe0f0; padding:8px 20px; font-size:18px; font-weight:800; color:#122a4d;">Grooved vs. Plain Drums</div>
+      <ul class="bullet" style="padding:14px 22px;">
+        <li>Machined helical grooves are strictly preferred over plain cylindrical drums.</li>
+        <li>Why? Grooves increase the bearing surface, eliminate inter-turn friction, prevent jamming, and drastically reduce wear.</li>
+        <li>Material: Grey Cast Iron Grade FG 200.</li>
+        <li>Configuration: Single right-hand helical groove for one rope; right+left-hand helical grooves for two ropes.</li>
+      </ul>
+    </div>
+  </div>
+  <div style="position:absolute; top:440px; left:56px; width:370px; border:2px solid #122a4d; border-radius:8px;">
+    <div style="background:#bfe0f0; padding:6px 14px; font-size:17px; font-weight:800; color:#122a4d; text-align:center;">Groove Pitch (t)</div>
+    <div style="padding:26px 14px; font-size:20px; font-weight:800; color:#122a4d; text-align:center;">t = d<sub>r</sub> + (2 to 3 mm)</div>
+  </div>
+  <div style="position:absolute; top:440px; left:453px; width:370px; border:2px solid #122a4d; border-radius:8px;">
+    <div style="background:#bfe0f0; padding:6px 14px; font-size:17px; font-weight:800; color:#122a4d; text-align:center;">Groove Diameter</div>
+    <div style="padding:26px 14px; font-size:20px; font-weight:800; color:#122a4d; text-align:center;">Dia. = d<sub>r</sub> + (1.5 to 3 mm)</div>
+  </div>
+  <div style="position:absolute; top:440px; left:850px; width:375px; border:2px solid #122a4d; border-radius:8px;">
+    <div style="background:#bfe0f0; padding:6px 14px; font-size:17px; font-weight:800; color:#122a4d; text-align:center;">Shell Thickness (t<sub>1</sub>)</div>
+    <div style="padding:20px 14px; font-size:19px; font-weight:800; color:#122a4d; text-align:center;">t<sub>1</sub> = 0.02D + (6 to 10 mm)</div>
+  </div>
+</div>
+
+<!-- PAGE 17: Synthesis flowchart -->
+<div class="page" data-document-role="page" data-label="Synthesis Flowchart">
+  <div class="grid"></div>
+  <h1 class="title">Synthesis: The End-to-End Design Procedure</h1>
+  <div style="position:absolute; top:130px; left:56px; width:340px; height:170px; background:#cdeaf2; border:2px solid #122a4d; border-radius:6px; padding:16px 20px;">
+    <div style="font-weight:800; font-size:18px; color:#122a4d;">(1) Application Setup</div>
+    <div style="font-size:15px; color:#233a55; margin-top:8px;">Define load, height, velocity. Select rope construction (6&times;7, 6&times;19) &amp; material (S<sub>ut</sub>).</div>
+  </div>
+  <div style="position:absolute; top:130px; left:470px; width:340px; height:170px; background:#ffffff; border:2px solid #122a4d; border-radius:6px; padding:16px 20px;">
+    <div style="font-weight:800; font-size:18px; color:#122a4d;">(2) Total Load Calculation</div>
+    <div style="font-size:15px; color:#233a55; margin-top:8px;">Compute load sum: Dead Weight + Rope Weight + Acceleration Forces.</div>
+  </div>
+  <div style="position:absolute; top:130px; left:884px; width:340px; height:170px; background:#cdeaf2; border:2px solid #122a4d; border-radius:6px; padding:16px 20px;">
+    <div style="font-weight:800; font-size:18px; color:#122a4d;">(3) Static Safety</div>
+    <div style="font-size:15px; color:#233a55; margin-top:8px;">Verify Static f<sub>s</sub> against requirements in Tables 23.5/23.6.</div>
+  </div>
+  <div style="position:absolute; top:400px; left:56px; width:340px; height:170px; background:#ffffff; border:2px solid #122a4d; border-radius:6px; padding:16px 20px;">
+    <div style="font-weight:800; font-size:18px; color:#122a4d;">(4) Bending Load</div>
+    <div style="font-size:15px; color:#233a55; margin-top:8px;">Determine sheave diameter D. Compute equivalent bending load P<sub>b</sub> (Eq. 23.3).</div>
+  </div>
+  <div style="position:absolute; top:400px; left:470px; width:340px; height:170px; background:#cdeaf2; border:2px solid #122a4d; border-radius:6px; padding:16px 20px;">
+    <div style="font-weight:800; font-size:18px; color:#122a4d;">(5) Fatigue Verification</div>
+    <div style="font-size:15px; color:#233a55; margin-top:8px;">Compute interface pressure p. Verify fatigue via p/S<sub>ut</sub> &le; 0.0015 target (Fig. 23.6).</div>
+  </div>
+  <div style="position:absolute; top:400px; left:884px; width:340px; height:170px; background:#ffffff; border:2px solid #122a4d; border-radius:6px; padding:16px 20px;">
+    <div style="font-weight:800; font-size:18px; color:#122a4d;">(6) Hardware Sizing</div>
+    <div style="font-size:15px; color:#233a55; margin-top:8px;">Detail sheave groove geometry (radius/depth/angle) and drum shell dimensions (pitch/thickness).</div>
+  </div>
+  <svg width="1180" height="400" style="position:absolute; top:110px; left:56px; pointer-events:none;" viewBox="0 0 1180 400">
+    <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#122a4d"/></marker></defs>
+    <line x1="396" y1="85" x2="414" y2="85" stroke="#122a4d" stroke-width="3" marker-end="url(#a2)"/>
+    <line x1="810" y1="85" x2="828" y2="85" stroke="#122a4d" stroke-width="3" marker-end="url(#a2)"/>
+    <path d="M 1054 215 L 1054 260 L 226 260 L 226 300" fill="none" stroke="#122a4d" stroke-width="3" marker-end="url(#a2)"/>
+    <line x1="396" y1="355" x2="414" y2="355" stroke="#122a4d" stroke-width="3" marker-end="url(#a2)"/>
+    <line x1="810" y1="355" x2="828" y2="355" stroke="#122a4d" stroke-width="3" marker-end="url(#a2)"/>
+  </svg>
+</div>
+
+<!-- PAGE 18: Quick Reference (IMAGE EMBED) -->
+<div class="page" data-document-role="page" data-label="Quick Reference">
+  <div class="grid"></div>
+  <h1 class="title">The Engineer's Quick Reference Blueprint</h1>
+  <img src="https://raw.githubusercontent.com/Romanch001/AI-Slide-Deck-Automation/main/runs/part2-20260729-194537/quick_reference.png" style="position:absolute; top:110px; left:20px; width:1240px; height:auto; border:2px solid #122a4d;">
+  <div style="position:absolute; top:595px; left:958px; width:275px; height:76px; background:#ffffff;"></div>
+</div>
+
+<!-- PAGE 19: Closing -->
+<div class="page" data-document-role="page" data-label="Conclusion">
+  <div class="grid"></div>
+  <h1 style="position:absolute; top:150px; left:80px; font-size:52px; font-weight:900; color:#122a4d; line-height:1.15;">Conclusion &amp;<br>Reference</h1>
+  <div style="position:absolute; top:380px; left:80px; width:620px;">
+    <div style="font-size:19px; font-weight:700; color:#122a4d;">Scope Covered in Part 2:</div>
+    <ul class="bullet" style="margin-top:10px;">
+      <li>Wire Material Breaking Strengths (S<sub>ut</sub>)</li>
+      <li>End-to-End Worked Examples (23.1 &minus; 23.4)</li>
+      <li>Rope Sheaves &amp; Drums Hardware Design</li>
+      <li>Integrated Design Synthesis</li>
+    </ul>
+    <p style="font-style:italic; color:#1596b3; font-size:16px; margin-top:26px;">Source material derived from Sections 23.2 &minus; 23.4 of V.B. Bhandari's 'Design of Machine Elements.'</p>
+  </div>
+  <svg width="480" height="560" style="position:absolute; top:90px; left:760px;" viewBox="0 0 480 560">
+    <path d="M 460 40 Q 300 60 260 220 Q 230 340 130 380 Q 60 400 30 460" fill="none" stroke="#9fc7db" stroke-width="8"/>
+    <path d="M 430 30 Q 280 60 250 210 Q 220 330 130 370 Q 70 395 50 450" fill="none" stroke="#122a4d" stroke-width="4"/>
+    <circle cx="130" cy="380" r="90" fill="none" stroke="#122a4d" stroke-width="3"/>
+    <circle cx="130" cy="380" r="55" fill="none" stroke="#17a6c9" stroke-width="3"/>
+    <circle cx="130" cy="380" r="30" fill="#ffffff" stroke="#122a4d" stroke-width="3"/>
+  </svg>
+</div>
+
+</body>
+</html>
