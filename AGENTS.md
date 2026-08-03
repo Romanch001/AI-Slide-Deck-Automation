@@ -105,6 +105,10 @@ The confirmed correct mechanism is Canva's **Magic Layers** feature (canva.com/h
 
 One Canva design per slide at this stage.
 
+**Known failure mode (confirmed 2026-08-03):** Magic Layers can silently produce a *blank* image for a densely-packed region (observed on a data table) while everything else on the slide converts correctly — the layer/element structure looks fine, but the extracted image content is empty. This is not visible from the "Image split into editable layers" success message; the design must be visually inspected. After every conversion, compare the resulting thumbnail against the source slide image, element by element for anything text-heavy or tabular — don't just confirm layers exist.
+
+If a region comes out blank: crop the correct area from the original source PNG (matching the broken element's aspect ratio), stage it publicly (this repo), `upload-asset-from-url`, then `update_fill` on the broken element with the new asset ID. This swaps the image content in place without disturbing position/size. Cheaper than restarting the slide.
+
 ## Phase 7 — Combine into one deck (Canva)
 
 Use the page-combine/merge capability to assemble all per-slide designs into a single design, in original slide order. Title it `<slug>` (human-readable form, e.g. "Wire Rope Groove Design — 2026-07-28").
