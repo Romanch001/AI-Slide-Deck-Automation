@@ -12,8 +12,11 @@ Before starting any run, verify all three:
 | NotebookLM | `notebooklm auth check --test --json` → `"status":"ok"` and `"checks.token_fetch":true` | `notebooklm login` |
 | GitHub | Write access to `Romanch001/AI-Slide-Deck-Automation` | Ask operator to grant/reconnect |
 | Canva | Connector/MCP exposes: design generation, per-element editing (add text, format text, insert shape, insert/replace image fill), and page-merge/combine | Ask operator to reconnect Canva connector |
+| Browser automation | A Playwright-drivable browser (headed or headless) with a way to establish one Canva login session that persists across calls | Set one up before Phase 6 — see that phase for why it's required |
 
 If any check fails, stop and report which one before proceeding — do not skip a phase and hope it resolves itself later.
+
+**Known bug (as of 2026-08-03):** `notebooklm-py` v0.7.3's login/session detection is hardcoded to the host `notebooklm.google.com`, but Google has since served the product at `notebook.google.com` for at least some accounts. When this happens, `notebooklm login` hangs indefinitely waiting for a host it will never see, even though the browser window itself shows a fully authenticated session — no retry, `--fresh`, or forced-reload trick fixes it, because the CLI's allowed-host list rejects the new domain outright. If `notebooklm login` won't complete after one retry, stop trying to force it and fall back to the operator manually downloading the PPTX from the NotebookLM web UI (Studio panel → slide deck artifact → download) directly into wherever Phase 4 expects its input. Re-check whether the CLI has been patched for the new host before spending more time on it in a future run.
 
 ## Naming convention
 
@@ -21,6 +24,8 @@ Every run gets a slug: lowercase topic, spaces→hyphens, date suffix.
 Example: topic "Wire Rope Groove Design" on 2026-07-28 → `wire-rope-groove-design-20260728`.
 
 Use this slug for: the NotebookLM notebook title, the GitHub staging folder, and the final Canva design title.
+
+**Multi-part decks:** if a topic is too large for one NotebookLM slide-deck generation, split it into separate notebooks/generations (Part 1, Part 2, …), each producing its own PPTX. Carry them through Phases 1–6 independently, staging each part's images into its own `part1/`, `part2/`, … subfolder under the same run slug. Only combine them at Phase 7 (merge into one final deck, in part order).
 
 ## Phase 0 — Topic intake and research scoping (interactive, do not skip)
 
@@ -86,15 +91,17 @@ Push all slides for the run before moving to Phase 6.
 
 ## Phase 6 — Recreate each slide as an editable Canva design
 
-There is no single "convert image to editable design" tool. The real mechanism (verified working, see run from 2026-07-28):
+**Superseded 2026-08-03.** The vision-rebuild approach previously documented here (manually re-authoring each slide as add-text/insert-shape/insert-fill elements) is abandoned — it does not reproduce the source slide closely enough, and the operator rejected its output on an earlier run. Do not use it.
 
-1. Read each staged slide image (vision) — identify text blocks, panel/background shapes, and any non-text graphic (diagrams, charts).
-2. Rebuild it as native Canva elements on one page:
-   - Text blocks → add-text + format-text (set font, size, color, alignment to match the theme)
-   - Colored panels/backgrounds → insert-shape
-   - Non-text graphics (diagrams, photos) → insert/replace an image fill, sourced from the same staged URL (crop to just that region if needed)
-3. **Do not recreate the NotebookLM logo/watermark.** It's simply never added — cleaner than deleting it after the fact.
-4. Match the approved theme spec from Phase 2 (colors, fonts) rather than copying the NotebookLM rendering pixel-for-pixel — small drift is fine, broken brand consistency is not.
+The confirmed correct mechanism is Canva's **Magic Layers** feature (canva.com/help/editable-magic-layers) — it converts a flat image into genuinely editable layers while preserving the original content, rather than having an LLM guess at a re-creation. **There is no API or MCP tool for this** (confirmed via the Canva connector's own help tool: "described as a Canva app feature used in the UI, with no API flow listed") — it only exists as a manual action in the Canva web UI. Getting it into an automated pipeline means driving the actual UI with a browser:
+
+1. **One-time setup:** open a Playwright-controlled browser and navigate to Canva. It won't have a session yet — the operator completes the Canva login once, manually, in that browser window. As long as the same browser profile/context is reused for every subsequent call, the session persists and no further logins are needed for the rest of the run (or future runs, if the profile is kept).
+2. **One slide at a time, no bulk/batch conversion** — this is a hard requirement from the operator, not just a suggestion. For each staged slide image (in order):
+   - Load the image into Canva (upload it, or open it on a page).
+   - Trigger Magic Layers on it through the UI.
+   - Confirm the result actually preserved the slide's content (read back the design, compare to the source image) before moving to the next slide.
+3. Magic Layers requires a paid Canva plan (Pro/Teams/Edu/Nonprofit/Enterprise/Business) — it silently isn't available on Free. If it's not appearing in the UI, check the operator's plan before assuming the automation is broken.
+4. Do not attempt to substitute `generate-design` + `create-design-from-candidate` as an automated stand-in for Magic Layers unless the operator explicitly says that tradeoff is acceptable for this run — it's a different mechanism (AI re-generation from a text query against the image, not layer-preserving conversion) and produced a rejected result on an earlier run (design `DAHREOYUVf8`, archived, do not reuse).
 
 One Canva design per slide at this stage.
 
